@@ -2,7 +2,7 @@
 
 A separate educational draft for David, Jacob and Riccardo. It starts from precomputed outcome COPEs and teaches participant-separated Shared Reward → Trust classification. This folder is independent of `rf1-sra-neural-signature`; the paper's analysis and validation samples are not modified.
 
-**Status:** notebook draft with a labelled synthetic fixture. A public-data candidate archive (67 participants, 804 outcome maps) has been staged and its downstream notebook computation tested locally. Zenodo publication is pending license/notice corrections; its downloader and Neurodesk Play execution are not yet tested. See `PUBLIC_CANDIDATE_REVIEW.json`. The committed notebook still defaults to synthetic mode.
+**Status:** notebook draft with a labelled synthetic fixture. A final public-data archive (67 participants, 804 outcome maps, four supporting files) has been prepared under CC0. It excludes third-party template assets; the updated notebook fetches the original reference separately and verifies reconstruction of the same mask. The final archive and downstream computation passed local tests; the Zenodo downloader and Neurodesk Play execution are not yet tested. See `PUBLIC_CANDIDATE_REVIEW.json`. The committed notebook still defaults to synthetic mode.
 
 ## Start here
 
@@ -55,12 +55,12 @@ After curation, `--manifest work/approved_manifest.csv` sums its recorded compre
 
 The candidate source is [OpenNeuro ds005123 v1.0.0](https://doi.org/10.18112/openneuro.ds005123.v1.0.0), with CC0 in its source metadata. The raw-release DOI and the new derivative-release DOI are separate citations. Use original, signed, uncentered outcome COPEs for computer/friend/stranger × positive/negative in Shared Reward and Trust. Exact source contrast names/weights and phase provenance must be checked before release; the notebook does not infer labels from numeric COPE indices.
 
-The release archive should contain:
+The finalized release archive contains:
 
 - `maps/*.nii.gz`: 12 finite, signed float32 condition maps per eligible person on the same verified grid.
-- `mask.nii.gz`: a predefined independent template/anatomical mask covered by the eligible inputs, with source/version/citation and no accuracy-based selection.
+- External reference mask: fetched separately by the notebook from the original TemplateFlow provider, checksum-verified and reconstructed with the predefined rule. No third-party mask or template is redistributed in the final Zenodo ZIP.
 - `manifest.csv`: one row per map with the fields demonstrated in the notebook. `byte_size` and `sha256` refer to each distributed compressed file.
-- `dataset_description.json`, `README`, source/model/QC description, licenses and checksums. Record the exact template and preprocessing/model source versions, L1/L2/run strategy and contrast directions.
+- `dataset_description.json`, `README` and `aggregate_image_checks.json`, with original license/provenance metadata. The final ZIP has exactly 804 maps and these four supporting files including the manifest (808 entries).
 
 Do not export paper-derived weights, group patterns, paper coverage masks, or outputs involving nonpublic/reserved people. The educational features and display maps are built within the tutorial's own permitted data boundary.
 

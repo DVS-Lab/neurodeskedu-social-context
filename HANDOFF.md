@@ -1,14 +1,14 @@
 # Handoff for Jacob and Riccardo
 
-This is an educational draft, separate from the paper. The notebook currently runs labelled synthetic maps. Its methods narrative is ready for review, but it is not a public-data demonstration or a NeurodeskEDU submission yet.
+This is an educational draft, separate from the paper. The committed notebook defaults to labelled synthetic maps. Its public-data computation has also been tested locally with the finalized 67-person archive (804 outcome COPEs), including independent template retrieval and exact mask reconstruction. Zenodo download and Neurodesk Play testing remain pending; this is not yet a NeurodeskEDU submission.
 
 ## Scientific/data review
 
 - Confirm the public source snapshot: ds005123 v1.0.0, originally N=114. Determine the actual eligible overlap of Shared Reward and Trust after existing QC and map completeness checks; do not promise N=114.
 - The user confirmed the full 62-person paper protection pool (original 50 plus 12 supplemental) and no additional external list. Obtain the authoritative private locks using the metadata-only overlap command in EXPORT_PUBLIC.md. Exclude those people before any map export. Keep membership/exclusion records private under ignored work/ or an approved private curation location.
 - Check the exact source outcome COPE definitions, signs, names/weights, phase evidence and retained-run strategy. The educational prediction is human (equal friend/stranger mean) versus computer, averaging positive/negative outcomes. This differs from the paper's full cross-valence matrix.
-- Use only participant-specific public-source derivatives. Establish an independent fixed template/anatomical mask; do not copy paper masks, trained weights or group patterns involving additional people.
-- Prepare a metadata export plan, record actual compressed file sizes, run the plan checker, and review provenance, finite values and geometry in the later approved export. The draft tools do not perform that image export.
+- Use only participant-specific public-source derivatives. Use the fixed external TemplateFlow reference and verified reconstruction; do not copy paper masks, trained weights or group patterns involving additional people. The template itself is not redistributed in the final dataset.
+- Prepare a metadata export plan, record actual compressed file sizes, run the plan checker, and review provenance, finite values and geometry in the later approved export. The staged exporter and finalizer are provided; the final upload excludes third-party template assets.
 - Finalize licenses, the original dataset/data-paper citation, derivative DOI, authors' full names/contributions and AI-assistance statement.
 
 ## Technical/teaching review

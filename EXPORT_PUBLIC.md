@@ -84,7 +84,24 @@ The notebook uses every condition to construct its valence-averaged human/comput
 
 There are five supporting files: the independent `mask.nii.gz`, `manifest.csv`, `dataset_description.json`, `aggregate_image_checks.json` and `README`. The exporter checks this exact allowlist before creating the ZIP. Total ZIP entries must equal **12 × eligible N + 5**. Maps retain source values and their original grid; only headers are sanitized. Template-mask terms remain separate from the source dataset's CC0 terms and need review before publication.
 
-**Only upload `work/zenodo-v1/public_outcome_copes.zip`**, after reviewing the aggregate summaries and testing the notebook with it. Never upload the whole `work/zenodo-v1/` directory: it also contains private membership locks and source paths.
+## 5. Finalize the upload without redistributing the third-party template
+
+The archive produced above is a staging artifact, not the final upload. The exact template's upstream metadata refers to a missing LICENSE file. We do not assume another template's terms or relicense it. The finalizer removes the template mask from the hosted bundle. The notebook obtains the original reference separately from TemplateFlow, verifies its SHA256, resamples it with the predefined rule, and checks the reconstructed binary mask's voxel hash against the reviewed mask. This changes no analysis voxels or participant map bytes.
+
+For the reviewed 67-person candidate:
+
+```bash
+python3 tools/finalize_public_release.py \
+  --input work/zenodo-v1/public_outcome_copes.zip \
+  --output work/zenodo-final/public_outcome_copes_v1.0.0.zip \
+  --sha256 3633a9d93f7b30a520b0056adaae352927bf7d4a6135aedefa4d1db2e84734e0
+```
+
+This requires the reviewed input checksum, preserves the original ZIP, checks every COPE hash, preserves all COPE and manifest bytes, replaces the staging README/license metadata, and emits a summary beside the final ZIP. A different input checksum requires review; do not substitute one merely to bypass the check.
+
+The **final upload** contains exactly **804 COPEs and four supporting files (808 ZIP entries)**: README, manifest.csv, dataset_description.json and aggregate_image_checks.json. No third-party template image or mask is included. Distributed maps and original metadata are dedicated under **CC0 1.0 Universal**. The repository's code remains MIT and its educational narrative CC BY 4.0; those licenses do not relicense upstream template assets.
+
+**Only upload `work/zenodo-final/public_outcome_copes_v1.0.0.zip`.** Never upload the whole work directory: it also contains private membership locks and source paths. In the Zenodo draft replace the old staging ZIP, change the license from CC BY 4.0 to CC0 1.0 Universal, retain version 1.0.0, and explain that the reference mask is retrieved separately by the accompanying notebook under its upstream terms.
 
 In Zenodo, create a new dataset upload, add that ZIP, describe its relationship to OpenNeuro ds005123 v1.0.0, and save a draft. A DOI can be reserved while it is a draft; it is registered on publication. The notebook's DOI, download URL, checksum, N and audit flags must be filled from the reviewed release before enabling public-data mode. See [Zenodo's upload instructions](https://help.zenodo.org/docs/deposit/create-new-upload/).
 

@@ -5,10 +5,10 @@
   "source_doi": "10.18112/openneuro.ds005123.v1.0.0",
   "derivative_doi": null,
   "archive_url": null,
-  "archive_sha256": null,
+  "archive_sha256": "08ea0ccfa3df67ec9ec34b29a50d852d5c0e53e5c1ad654073587c37dddd10ae",
   "max_download_bytes": 2000000000,
   "max_uncompressed_bytes": 5000000000,
-  "expected_n": null,
+  "expected_n": 67,
   "manifest_path": "manifest.csv",
   "mask_path": "mask.nii.gz",
   "membership_audit": {
@@ -19,7 +19,9 @@
   },
   "mask_provenance": {
     "kind": "independent_template",
-    "description": null,
-    "source_url": null
-  }
+    "description": "Fixed TemplateFlow MNI152NLin6Asym res-02 brain mask; fetched separately and reconstructed with nearest-neighbor resampling.",
+    "source_url": "https://github.com/templateflow/tpl-MNI152NLin6Asym",
+    "distribution": "external_reference_only"
+  },
+  "derivative_version": "1.0.0"
 }

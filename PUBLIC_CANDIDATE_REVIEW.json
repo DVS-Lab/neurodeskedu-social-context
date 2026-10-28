@@ -1,13 +1,12 @@
 {
-  "status": "local_candidate_computation_passed_publication_pending",
+  "status": "final_archive_ready_for_zenodo_upload",
   "review_date": "2026-10-27",
-  "archive_sha256": "3633a9d93f7b30a520b0056adaae352927bf7d4a6135aedefa4d1db2e84734e0",
-  "archive_md5": "69acc550e7ac017be70c3bcbe84945ef",
-  "archive_bytes": 310055468,
+  "archive_sha256": "08ea0ccfa3df67ec9ec34b29a50d852d5c0e53e5c1ad654073587c37dddd10ae",
+  "archive_bytes": 310047052,
   "n": 67,
   "outcome_maps": 804,
   "mask_voxels": 84479,
-  "archive_entries": 809,
+  "archive_entries": 808,
   "exact_content_allowlist_verified": true,
   "per_map_bytes_and_sha256_verified": true,
   "finite_values_and_common_grid_verified": true,
@@ -16,22 +15,31 @@
   "convergence_warnings": false,
   "wall_seconds": 44.477082208002685,
   "in_notebook_elapsed_seconds": 10.528712415980408,
-  "test_scope": "Local unpublished candidate, using checksum-verified extracted ZIP instead of the Zenodo downloader. All downstream computational cells unchanged. This result does not authorize changes to the parent paper.",
+  "test_scope": "Final maps-only archive tested in a fresh Jupyter kernel. Original TemplateFlow reference fetched from its provider and exact binary mask reconstructed. All downstream computational cells passed; COPE/manifest bytes and predictions unchanged from the staged candidate. No paper or protected images accessed.",
   "zenodo_download_tested": false,
   "neurodesk_play_tested": false,
   "private_membership_files_reaudited_on_mac": false,
   "public_release_config_status": "draft_not_published",
   "remaining_release_items": [
-    "Reconcile Zenodo CC-BY-4.0 selection with bundle COPE CC0 metadata and document component-specific terms.",
-    "Resolve the exact MNI152NLin6Asym brain-mask redistribution terms and include the required notice; current bundle contains a placeholder.",
-    "Replace staged/unreviewed README language when preparing the final archive.",
-    "Pin final archive checksum, dataset version, DOI and public file URL; test the actual Zenodo download after release."
+    "Replace draft ZIP and license/description in Zenodo; retain version 1.0.0.",
+    "After publication pin DOI and actual file URL; test the Zenodo downloader. Neurodesk Play testing remains a later tutorial submission task."
   ],
   "mask_license_review": {
     "template_metadata_url": "https://raw.githubusercontent.com/templateflow/tpl-MNI152NLin6Asym/master/template_description.json",
     "template_metadata_license": "See LICENSE file",
     "template_license_file": "Not present at the checked GitHub/S3 paths.",
     "related_mcgill_notice_url": "https://www.mcgill.ca/bic/software/tools-data-analysis/anatomical-mri/atlases/icbm152-non-linear",
-    "limitation": "McGill page describes the symmetric 6th-generation template; the exported template is FSL asymmetric. Do not treat that alone as confirmation of the exact asset terms."
-  }
+    "limitation": "McGill page describes the symmetric 6th-generation template; the exported template is FSL asymmetric. Do not treat that alone as confirmation of the exact asset terms.",
+    "resolution": "No third-party template asset is redistributed or relicensed; the independently fetched upstream reference stays outside the CC0 archive. Exact asset license was not established and is not assumed."
+  },
+  "source_staged_archive_sha256": "3633a9d93f7b30a520b0056adaae352927bf7d4a6135aedefa4d1db2e84734e0",
+  "third_party_template_files_included": false,
+  "license": "CC0-1.0",
+  "external_template_download_and_reconstruction_tested": true,
+  "reconstructed_mask_voxels": 84479,
+  "reconstructed_mask_data_sha256": "898cdabd5027b191ba2b05d847d90e01743c281b8ef3730dc90fa1b7d0a822da",
+  "cope_and_manifest_bytes_unchanged": true,
+  "classification_results_unchanged": true,
+  "final_notebook_wall_seconds": 25.240068707993487,
+  "final_notebook_elapsed_seconds": 9.389546375023201
 }
