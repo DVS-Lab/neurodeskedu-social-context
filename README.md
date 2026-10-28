@@ -1,70 +1,54 @@
 # Cross-task social-context decoding
 
-A working NeurodeskEDU tutorial draft using **67 public participants and 804 precomputed outcome COPEs** from Shared Reward and Trust. The notebook downloads a fixed Zenodo release, checks every map, constructs human/computer patterns, and evaluates participant-separated cross-task prediction. No fMRI preprocessing, first-level model fitting, private data or FSL installation is required.
+A NeurodeskEDU teaching draft using **67 public participants and 804 precomputed outcome COPEs** from Shared Reward and Trust. Train a human/computer classifier in Shared Reward, then evaluate both tasks in the same excluded participants.
 
-[Open the notebook](Cross_task_decoding.ipynb) · [Zenodo dataset](https://doi.org/10.5281/zenodo.23718599) · [Validation record](VALIDATION.json)
+[View the notebook](Cross_task_decoding.ipynb) · [Download the notebook](https://raw.githubusercontent.com/DVS-Lab/neurodeskedu-social-context/main/Cross_task_decoding.ipynb) · [Zenodo maps](https://doi.org/10.5281/zenodo.23718599)
 
-## Run it
+## Run in Neurodesk Play
 
-Use Python **3.10–3.13**. The pinned environment passed locally with Python 3.13.5 and on **Neurodesk Play / Neurodesktop 2026-10-07 with Python 3.13.15**. A cached Play run of the enhanced notebook took about 28 seconds including fresh-kernel startup; its 999 permutations took about 7 seconds. See the [Play validation record](NEURODESK_PLAY_VALIDATION.json).
+1. Download `Cross_task_decoding.ipynb` and open it in [Neurodesk Play](https://play.neurodesk.org/). You can use JupyterLab's **File → Open from URL** with the download link above, or upload the downloaded notebook.
+2. Use Play's default **Python [conda env:base]** kernel.
+3. Choose **Kernel → Restart Kernel and Run All Cells**, or work through the cells with **Shift+Enter**.
 
-```bash
-git clone https://github.com/DVS-Lab/neurodeskedu-social-context.git
-cd neurodeskedu-social-context
-bash run_tutorial.sh
+**No installation, environment creation, setup script, custom kernel or configuration sidecar is required.** The first cell loads the explicit module:
+
+```python
+import module
+await module.load("fsl/6.0.7.22")
+await module.list()
 ```
 
-The launcher finds a compatible Python (including standard Anaconda/Miniforge/Miniconda locations), creates a local `.venv`, installs `requirements.txt`, and opens `Cross_task_decoding.ipynb` in JupyterLab. Select **Kernel → Restart Kernel and Run All Cells**. If you already have the checkout, run `git pull --ff-only` there before launching it. `bash run_tutorial.sh --check` checks interpreter selection without installing or starting anything; `TUTORIAL_PYTHON=/path/to/python` overrides selection.
+The module supplies `fslpython`, including scikit-learn. Cells marked `%%script fslpython` run their visible code in that environment. Other cells use Play's preinstalled data-handling and plotting libraries. Numeric result files in `outputs/public/` connect the steps. Both Python environments and the Neurodesktop image are recorded at the end.
 
-The first run downloads approximately **310 MB**, plus approximately 1.5 MB of external template references, and caches the files. Allow about **1.5 GB free disk space**. The feature array uses about 91 MB, with additional memory for model fitting. Download time depends on the connection; repeat runs use the checksum-verified cache.
+The first run downloads about **310 MB**, plus 1.5 MB of independent template references. Allow roughly **1.5 GB of free disk space**. Downloads are verified and cached in `data/`; result tables and five figures go to `outputs/public/`. Retrieving an uncached Neurodesk module can add time.
 
-In **Neurodesk Play**, use its existing JupyterLab rather than starting a second server:
+The notebook is self-contained and uses explicit loops with **no user-defined functions**. No preprocessing or first-level model fitting is required. Curator export tools and private audit inputs are separate from the learner workflow.
 
-```bash
-bash run_tutorial.sh --setup-play
-```
-
-This installs an isolated environment and registers **Social context (pinned)**. Open `Cross_task_decoding.ipynb`, choose that kernel and use **Restart Kernel and Run All Cells**. Keep `data_release.json` beside the notebook. `ml` loads application containers; this Python-only example does not execute FSL and therefore needs no FSL module. The notebook runs `ml list` when available and records the base image and exact Python package versions.
-
-For a fresh-kernel batch check in either environment:
-
-```bash
-.venv/bin/python tools/execute_tutorial.py
-# On Play, add: --kernel social-context
-```
-
-Outputs and downloaded files stay local and are ignored by Git. The executed copy is saved under `work/`.
-
-**Public mode is the default.** For a simulated code-flow demonstration, explicitly change `MODE` to `"synthetic"` in the first code cell. Download or integrity failures stop execution; they never silently select synthetic data.
+The installation-free path passed on **Neurodesktop 2026-10-07** using the default Play kernel and FSL module. A fresh-data run took about **2½ minutes**; a cached UI Run All took **43 seconds**, including **14 seconds** for 999 permutations. All 19 code cells completed. See the [validation record](NEURODESK_PLAY_VALIDATION.json).
 
 ## What predicts what?
 
-| Evaluation | Train on | Evaluate on | Unit kept out of training |
-| --- | --- | --- | --- |
-| Within-task control | Shared Reward human vs computer maps | Shared Reward human vs computer maps | Participant |
-| Cross-task transfer | Shared Reward human vs computer maps | Trust human vs computer maps | The same participant across both tasks |
+| Evaluation | Train on | Predict in excluded participants |
+| --- | --- | --- |
+| Within-task control | Shared Reward human/computer maps | Shared Reward human/computer maps |
+| Cross-task transfer | Shared Reward human/computer maps | Trust human/computer maps |
 
-Each source task supplies computer, friend and stranger maps for two outcome valences. The notebook averages positive/negative outcomes within partner, then averages friend and stranger equally to form **human**. The second condition is **computer**. Features are spatially centered within a fixed independent mask. A fixed linear SVM is fitted in five participant folds; no classifier or mask is selected by accuracy.
+First average the two outcome valences within each partner, then average friend and stranger equally into **human**; computer supplies the other class. Each map is spatially centered within a fixed independent mask. The linear SVM settings and five participant folds stay fixed.
 
-The reported metric is **paired ordering accuracy**: how often a held-out participant's human map scores above their computer map. This differs from threshold-based accuracy on individual maps. Participant bootstrap intervals summarize the fixed out-of-fold predictions and omit uncertainty from refitting the training models. A separate **999-permutation** analysis coherently swaps human/computer labels within each participant across both tasks and refits every fold. It reports raw and two-test maximum-statistic familywise p-values, exceedances, null means and Monte Carlo uncertainty. A complete training-only orthonormal span speeds up refits without selecting features; agreement with the full-voxel predictions is checked before randomization. Up to four processes are used with one BLAS thread each.
+The score is **paired ordering accuracy**: does a participant's human map score above their computer map? Participant bootstrap intervals describe fixed out-of-fold predictions and omit training-refit uncertainty. Separately, **999 participant-blocked permutations** swap each person's labels coherently across tasks, refit every fold, and report raw and two-test maximum-statistic familywise p-values. Complete training coordinates speed up the repeated fits; agreement with the original full-voxel classifier is checked first. The permutation calculation uses straightforward serial loops.
 
-The five figure panels show label construction and fold allocation, performance intervals, participant margins, permutation null distributions, and six predefined axial planes of coefficients and Haufe-style forward patterns over an anatomical reference. Display scales clip at each pattern’s 99th absolute percentile; this affects colors only and is not a significance threshold. They illustrate the tutorial; they do not establish causal regional importance or an abstract, uniquely social representation.
+Five figures show condition construction/folds, accuracy intervals, participant margins, permutation distributions, and predefined axial views of coefficients and forward patterns. Color clipping affects display only. These maps do not establish causal regional importance or an abstract, uniquely social representation.
 
 ## Data boundary and licenses
 
-- Original public source: [OpenNeuro ds005123 v1.0.0](https://doi.org/10.18112/openneuro.ds005123.v1.0.0), originally N=114.
-- Educational derivatives: [Zenodo v1.0.0](https://doi.org/10.5281/zenodo.23718599), N=67 after the protected-pool exclusion, existing QC and complete-input checks.
-- All 62 people in the parent paper's protected pool were excluded before export. Detailed membership stays outside this repository. The notebook uses only released maps and does not access reserved images, paper caches or frozen signatures.
-- Tutorial folds are temporary cross-validation partitions inside the educational subset. They are not the paper's sealed final validation cohort. Tutorial results must not drive changes to the paper's frozen candidates.
-- Distributed maps and original archive metadata: **CC0 1.0**. Code: **MIT**. Original tutorial narrative: **CC BY 4.0**.
-- Third-party template assets are not redistributed in the Zenodo ZIP. The notebook retrieves checksum-pinned TemplateFlow mask and anatomical references from their provider, reconstructs the fixed mask, and verifies its exact binary voxel hash. Upstream terms apply to that external resource.
+- Source: [OpenNeuro ds005123 v1.0.0](https://doi.org/10.18112/openneuro.ds005123.v1.0.0), originally N=114. Educational derivatives: [Zenodo v1.0.0](https://doi.org/10.5281/zenodo.23718599), N=67 after existing QC, completeness checks and protected-pool exclusion.
+- All 62 people in the parent paper's protected pool were excluded before export. Detailed membership stays outside this repository. The tutorial uses only the immutable public map release and does not read paper caches, frozen signatures or reserved images.
+- Temporary tutorial folds are not the paper's sealed final validation cohort. Tutorial results must not guide changes to the paper's frozen candidates.
+- Maps and original archive metadata: **CC0 1.0**. Code: **MIT**. Original explanations: **CC BY 4.0**. External TemplateFlow mask/anatomy and anatomical underlays retain upstream terms; those references are not in the Zenodo ZIP.
+- The exact archive has **804 COPEs plus four supporting files**. Its version-specific URL and SHA256 are written directly in the notebook. Curator metadata is retained in `data_release.json`; learners do not need that file.
 
-The archive contains exactly **804 COPEs plus four supporting files**. Its SHA256 and version-specific URL are pinned in `data_release.json`. The consumer's integrity checks complement the guarded Linux2 export; they do not independently recreate the private membership audit.
+## Review and validation
 
-## Review and contribution
+See [HANDOFF.md](HANDOFF.md), [VALIDATION.json](VALIDATION.json) and [NEURODESK_PLAY_VALIDATION.json](NEURODESK_PLAY_VALIDATION.json). Human scientific and teaching review remains before NeurodeskEDU submission. AI assistance is disclosed in the notebook. No colleague has been messaged automatically.
 
-See [HANDOFF.md](HANDOFF.md) for remaining human teaching/scientific review, contributor credit and target-environment validation details. This is not yet a NeurodeskEDU submission. Codex assistance is disclosed in the notebook. No colleague has been messaged automatically.
-
-The draft follows the [contribution guide](https://neurodesk.org/edu/contribute/examples/), [repository README](https://github.com/neurodesk/neurodeskedu/blob/main/README.md), and [example template](https://github.com/neurodesk/neurodeskedu/blob/main/books/examples/template.ipynb).
-
-Curator-only provenance/export instructions are in [EXPORT_PUBLIC.md](EXPORT_PUBLIC.md). Learners do not need to run those tools. Private curation records, images, caches and environments are ignored by Git; only the notebook, configuration, code and small documentation belong in this repository.
+The draft follows the [contribution guide](https://neurodesk.org/edu/contribute/examples/), [README](https://github.com/neurodesk/neurodeskedu/blob/main/README.md), and [template](https://github.com/neurodesk/neurodeskedu/blob/main/books/examples/template.ipynb). [EXPORT_PUBLIC.md](EXPORT_PUBLIC.md) is for curators, not learners.

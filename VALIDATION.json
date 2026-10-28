@@ -1,41 +1,49 @@
 {
-  "status": "enhanced_public_tutorial_passed_local_and_neurodesk_play",
+  "status": "novice_notebook_passed_default_neurodesk_play_without_installation",
   "validation_date": "2026-10-28",
   "real_public_data_executed": true,
   "neurodesk_play_tested": true,
-  "notebook_cells": 30,
-  "executed_code_cells": 14,
-  "longest_code_cell_lines": 81,
-  "focused_checks_passed": 24,
+  "notebook_cells": 39,
+  "executed_code_cells": 19,
+  "user_defined_functions": 0,
+  "longest_code_cell_lines": 48,
+  "focused_checks_passed": 23,
   "watermark_tested": true,
-  "code_sha256": "6b338b5a1f871fcb5864acec30de2379a667efd931d23f47abcbd93a24a42cd5",
-  "notebook_sha256": "d568090e221f33f8222a8a3ea3060368a7d91adf147e3c45cd409346554f4ca4",
-  "post_execution_edit": "Updated only Markdown review status, learning goals and measured Play runtime after local execution. Computational source is identical to the Play-tested revision.",
-  "local_execution": {
+  "ui_restart_and_run_all_tested": true,
+  "code_sha256": "9e6b9d749564b22a6b31bf301635e1373ed5c4cb7f4bc2975db19d82a7f35cdf",
+  "notebook_sha256": "ba27dfa10405a693b8032114e562754de19a930f1f88709de7df02cd1bf840ba",
+  "package_installation_required": false,
+  "virtual_environment_required": false,
+  "custom_kernel_required": false,
+  "configuration_sidecar_required": false,
+  "actual_execution": {
     "mode": "public",
-    "python": "3.13.5",
-    "packages": {
-      "numpy": "2.1.3",
-      "pandas": "2.2.3",
-      "scikit-learn": "1.6.1",
-      "nibabel": "5.3.2",
-      "matplotlib": "3.10.0",
-      "scipy": "1.15.3",
-      "joblib": "1.6.0",
-      "threadpoolctl": "3.7.0",
-      "ipykernel": "6.29.5"
+    "python": "3.13.15",
+    "base_packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "nibabel": "5.4.2",
+      "matplotlib": "3.11.2",
+      "scipy": "1.18.1",
+      "watermark": "2.6.0"
     },
-    "neurodesktop_image": {},
-    "module_audit": "ml unavailable: outside the Neurodesk module shell",
+    "neurodesktop_image": "ghcr.io/neurodesk/neurodesktop:2026-10-07",
+    "module": "fsl/6.0.7.22",
+    "fsl_python": {
+      "python": "3.12.13",
+      "packages": {
+        "numpy": "2.1.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.5.2",
+        "threadpoolctl": "3.6.0"
+      }
+    },
     "n": 67,
     "input_map_files": 804,
     "masked_voxels": 84479,
-    "recorded_compressed_map_bytes": 309712382,
-    "feature_array_bytes": 90561488,
     "permutations": 999,
-    "permutation_seconds": 4.853475959011121,
+    "permutation_seconds": 14.133866179967299,
     "max_permutation_solver_iterations": 51,
-    "full_vs_span_max_margin_difference": 2.1094237467877974e-14,
     "paired_accuracies": [
       0.8059701492537313,
       0.8805970149253731
@@ -48,34 +56,22 @@
       0.001,
       0.001
     ],
-    "elapsed_seconds": 15.263976082991576,
-    "real_public_data_used": true
+    "elapsed_seconds": 42.928558302111924,
+    "real_public_data_used": true,
+    "package_installation_required": false,
+    "custom_kernel_required": false
   },
   "neurodesk_play_record": "NEURODESK_PLAY_VALIDATION.json",
-  "actual_public_n_and_download_bytes": {
-    "n": 67,
-    "outcome_maps": 804,
-    "archive_bytes": 310047052,
-    "source": "Published Zenodo record, downloaded and verified from an empty cache"
-  },
-  "source_review": {
-    "neurodesk_template_sha": "26c5955f95a30cff0c44c7906c8bff8d5b10c282",
-    "neurodesk_readme_sha": "8e7d1f0d0bd6215fbbffe5cf679b3d446a8f480d"
-  },
-  "export_validation": "Finalizer preserves all 804 COPEs and manifest byte-for-byte; final archive excludes third-party template assets. External template reconstruction and full downstream notebook execution passed. See PUBLIC_CANDIDATE_REVIEW.json.",
-  "zenodo_download_tested": true,
-  "isolated_requirements_install_tested": true,
+  "archive_sha256": "08ea0ccfa3df67ec9ec34b29a50d852d5c0e53e5c1ad654073587c37dddd10ae",
+  "archive_n": 67,
+  "archive_map_count": 804,
+  "export_validation": "Existing guarded public export and byte-preserving release checks retained. The tutorial consumes the immutable reviewed archive and validates all maps and the independent mask hash.",
   "published_review": "PUBLISHED_RECORD_REVIEW.json",
-  "earlier_synthetic_smoke_test": {
-    "synthetic_participants": 32,
-    "synthetic_maps": 384,
-    "synthetic_wall_seconds_approximately": 10.53,
-    "synthetic_in_notebook_elapsed_seconds": 3.1139570829982404
-  },
   "statistical_checks": [
-    "Training-only complete numerical span matches full-voxel linear SVM fits under relabelings, including rank-deficient fixtures.",
-    "Each permutation swaps paired labels coherently across both tasks, refits every training fold and uses swapped held-out labels.",
-    "Serial and parallel randomizations match for fixed seeds.",
-    "Observed full-voxel and span-compressed paired orderings agree before public-data permutations."
-  ]
+    "Executed actual inline classifier and randomization cells on small fixtures, including rank-deficient data.",
+    "Complete training coordinates match full-voxel classifiers before public-data randomizations.",
+    "Every randomization coherently relabels training and held-out pairs across tasks and refits every fold.",
+    "Participant folds and fixed model settings preserved; public paired accuracies remain 54/67 and 59/67."
+  ],
+  "previous_workflow": "664e869: isolated-environment validation retained in Git history; setup script and package installation instructions removed from current learner path."
 }
