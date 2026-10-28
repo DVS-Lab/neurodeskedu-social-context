@@ -56,3 +56,20 @@ def test_swaps_refit_training_and_score_held_out_labels_in_both_tasks():
     # Swapping every person's labels reverses both training and test labels, preserving accuracy.
     np.testing.assert_equal(f['permuted_accuracy'](compressed, swaps)[0],
                             f['permuted_accuracy'](compressed, -swaps)[0])
+
+def test_parallel_randomizations_match_serial_results():
+    from joblib import Parallel, delayed, parallel_config
+    f = functions(); rng = np.random.default_rng(81)
+    x = rng.normal(size=(12, 2, 2, 18))
+    compressed = []
+    for train, test in KFold(n_splits=3, shuffle=True, random_state=2).split(x):
+        a, targets = f['training_span'](x[train, 0].reshape(-1, 18),
+                                       [x[test, t].reshape(-1, 18) for t in range(2)])
+        compressed.append((train, test, a, targets))
+    flips = rng.choice([-1, 1], size=(5, len(x)))
+    serial = [f['permuted_accuracy'](compressed, swap) for swap in flips]
+    with parallel_config(backend='loky', n_jobs=2, inner_max_num_threads=1):
+        parallel = Parallel()(delayed(f['permuted_accuracy'])(compressed, swap) for swap in flips)
+    for expected, actual in zip(serial, parallel):
+        np.testing.assert_equal(actual[0], expected[0])
+        assert actual[1] == expected[1]
