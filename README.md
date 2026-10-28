@@ -6,7 +6,7 @@ A working NeurodeskEDU tutorial draft using **67 public participants and 804 pre
 
 ## Run it
 
-Use Python **3.10–3.13**; the pinned environment has been tested locally with Python 3.13.5.
+Use Python **3.10–3.13**. The pinned environment passed locally with Python 3.13.5 and on **Neurodesk Play / Neurodesktop 2026-10-07 with Python 3.13.15**. A cached Play run of the enhanced notebook took about 28 seconds including fresh-kernel startup; its 999 permutations took about 7 seconds. See the [Play validation record](NEURODESK_PLAY_VALIDATION.json).
 
 ```bash
 git clone https://github.com/DVS-Lab/neurodeskedu-social-context.git
