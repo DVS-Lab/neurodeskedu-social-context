@@ -1,4 +1,4 @@
-# Pinned working environment; final Neurodesk Play testing remains separate.
+# Exact Python package versions for the isolated teaching environment.
 numpy==2.1.3
 pandas==2.2.3
 scikit-learn==1.6.1
@@ -10,3 +10,5 @@ watermark==2.5.0
 ipykernel==6.29.5
 jupyterlab==4.3.4
 scipy==1.15.3
+joblib==1.6.0
+threadpoolctl==3.7.0

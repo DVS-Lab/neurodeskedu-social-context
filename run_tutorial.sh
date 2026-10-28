@@ -26,5 +26,10 @@ if [[ "${1:-}" == '--check' ]]; then
 fi
 "$tutorial_python" -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
+if [[ "${1:-}" == '--setup-play' ]]; then
+  .venv/bin/python -m ipykernel install --user --name social-context --display-name 'Social context (pinned)'
+  printf '%s\n' 'Open Cross_task_decoding.ipynb in the existing JupyterLab and select Social context (pinned).'
+  exit 0
+fi
 export PATH="$tutorial_root/.venv/bin:$PATH"
 exec .venv/bin/python -m jupyterlab "$tutorial_root/Cross_task_decoding.ipynb"
