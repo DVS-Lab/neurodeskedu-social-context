@@ -3,6 +3,7 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+import zipfile
 import numpy as np
 import nibabel as nib
 import pytest
@@ -91,6 +92,11 @@ def test_archive_preserves_signed_effects_sanitizes_headers_and_hides_sources(tm
     manifest=(tmp_path/'out/bundle/manifest.csv').read_text()
     assert str(path) not in manifest and 'source_path' not in manifest and 'source_sha256' not in manifest
     assert (tmp_path/'out/public_outcome_copes.zip').is_file()
+    with zipfile.ZipFile(tmp_path/'out/public_outcome_copes.zip') as archive:
+        assert set(archive.namelist())=={
+            'maps/sub-00999_sharedreward_computer_negative_cope.nii.gz','mask.nii.gz',
+            'manifest.csv','dataset_description.json','aggregate_image_checks.json','README'}
+    assert result['archive_members']==6 and result['exact_content_allowlist_passed']
 
 
 def test_overlap_cli_only_reads_metadata_and_reports_no_ids(tmp_path,monkeypatch,capsys):
@@ -153,3 +159,32 @@ def test_plan_filters_protected_and_unpublished_runs_before_source_access(tmp_pa
     assert len(rows)==12 and result['n']==1 and not result['intensities_loaded']
     assert result['protected_public_n']==1
     assert result['exclusion_counts']=={'retained_source_runs_not_all_in_public_release':1}
+
+
+def test_fixed_template_mask_uses_eligible_grid_but_no_participant_intensities(tmp_path,monkeypatch):
+    import prepare_public_maps as impl
+    path,_,_,row=image_fixture(tmp_path)
+    template=tmp_path/'templateflow'/impl.TEMPLATE_MASK; template.parent.mkdir()
+    values=np.zeros((4,6,8),dtype='uint8'); values[1:3,1:5,1:7]=1
+    nib.save(nib.Nifti1Image(values,np.diag([.5,.5,.5,1.])),template)
+    original_get=nib.Nifti1Image.get_fdata
+    def template_or_output_only(image,*args,**kwargs):
+        filename=image.get_filename()
+        assert filename is None or Path(filename)!=path,'Mask preparation read participant intensities'
+        return original_get(image,*args,**kwargs)
+    monkeypatch.setattr(nib.Nifti1Image,'get_fdata',template_or_output_only)
+    target,metadata=impl.prepare_template_mask(tmp_path/'out',[row],{'participant_ids':[]},template)
+    mask=nib.load(target); actual=mask.get_fdata()
+    assert mask.shape==(2,3,4) and np.isin(actual,[0,1]).all() and actual.any()
+    np.testing.assert_equal(mask.affine,np.eye(4))
+    meta=json.loads(metadata.read_text())
+    assert meta['sha256']==sha256(target) and meta['template_sha256']==sha256(template)
+    assert not meta['participant_intensities_used'] and not meta['accuracy_or_group_coverage_selection']
+
+
+def test_template_mask_rejects_protected_reference_before_any_image_access(tmp_path,monkeypatch):
+    import prepare_public_maps as impl
+    _,_,_,row=image_fixture(tmp_path)
+    monkeypatch.setattr(nib,'load',lambda *a:pytest.fail('Protected reference opened while preparing a mask'))
+    with pytest.raises(ValueError,match='Protected participant'):
+        impl.prepare_template_mask(tmp_path/'out',[row],{'participant_ids':[row['participant_id']]},tmp_path/impl.TEMPLATE_MASK)

@@ -48,7 +48,16 @@ To share results back without disclosing identities, copy only the aggregate JSO
 
 ## 4. Stage the archive after reviewing the plan and independent mask
 
-Supply a binary independent template/anatomical mask already resampled into the source grid, plus a JSON with `kind: "independent_template"`, `description`, `source_url`, and `sha256` of that mask. Do not use the paper's learned/group coverage mask. The exporter does not choose masks from accuracy or silently resample one.
+The recommended command prepares the fixed TemplateFlow MNI152NLin6Asym res-02 brain mask from the configured TemplateFlow directory (normally `/ZPOOL/data/tools/templateflow`). It explicitly resamples that binary mask into the common source grid using nearest-neighbor interpolation. Only an eligible map's header supplies the grid; participant intensities, coverage thresholds and classifier results do not enter mask construction. It never uses the paper's group coverage mask. Missing template files stop the export; it does not download into or modify the TemplateFlow directory.
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 tools/prepare_public_maps.py \
+  --paper-root /ZPOOL/data/projects/rf1-sra-neural-signature \
+  --no-additional-external-validation --stage archive \
+  --prepare-template-mask
+```
+
+Alternatively, supply a previously reviewed binary independent template/anatomical mask already resampled into the source grid, plus a JSON with `kind: "independent_template"`, `description`, `source_url`, and `sha256` of that mask:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python3 tools/prepare_public_maps.py \
@@ -61,6 +70,23 @@ PYTHONDONTWRITEBYTECODE=1 python3 tools/prepare_public_maps.py \
 This rechecks membership, provenance and source hashes, then stages maps with sanitized NIfTI headers and finite signed float32 effects. No centering, thresholding or sign inversion is applied. It writes the public manifest, source/contrast metadata, aggregate checks and a single ZIP suitable for Zenodo's file-count limit. Already-compressed `.nii.gz` files are stored without a second compression pass. An existing bundle is not overwritten silently.
 
 `archive_summary.json` records actual N, map count, compressed-map bytes, ZIP bytes and SHA256. Its status is **staged for review**, not published. Mask coverage, licensing/attribution and notebook public-mode execution still need final review. No DOI is minted and nothing is uploaded by this script.
+
+## Exact public archive contents
+
+Each eligible participant contributes exactly these twelve signed, uncentered outcome COPEs:
+
+| Task | COPEs | Condition names |
+| --- | --- | --- |
+| Shared Reward | 1–6 | C_pun, C_rew, F_pun, F_rew, S_pun, S_rew |
+| Trust | 4–9 | C_def, C_rec, F_def, F_rec, S_def, S_rec |
+
+The notebook uses every condition to construct its valence-averaged human/computer inputs. Human is the equal average of friend and stranger. Full-trial Shared Reward maps, decision/neutral maps, UGR, Social Doors, z statistics, variance maps, individual-run duplicates, fitted paper models and protected participants are not included.
+
+There are five supporting files: the independent `mask.nii.gz`, `manifest.csv`, `dataset_description.json`, `aggregate_image_checks.json` and `README`. The exporter checks this exact allowlist before creating the ZIP. Total ZIP entries must equal **12 × eligible N + 5**. Maps retain source values and their original grid; only headers are sanitized. Template-mask terms remain separate from the source dataset's CC0 terms and need review before publication.
+
+**Only upload `work/zenodo-v1/public_outcome_copes.zip`**, after reviewing the aggregate summaries and testing the notebook with it. Never upload the whole `work/zenodo-v1/` directory: it also contains private membership locks and source paths.
+
+In Zenodo, create a new dataset upload, add that ZIP, describe its relationship to OpenNeuro ds005123 v1.0.0, and save a draft. A DOI can be reserved while it is a draft; it is registered on publication. The notebook's DOI, download URL, checksum, N and audit flags must be filled from the reviewed release before enabling public-data mode. See [Zenodo's upload instructions](https://help.zenodo.org/docs/deposit/create-new-upload/).
 
 ## What to say in the notebook
 

@@ -28,6 +28,8 @@ MAPPING={
           (6,'friend','negative','F_def'),(7,'friend','positive','F_rec'),
           (8,'stranger','negative','S_def'),(9,'stranger','positive','S_rec')]
 }
+TEMPLATE_MASK='tpl-MNI152NLin6Asym_res-02_desc-brain_mask.nii.gz'
+TEMPLATE_URL='https://github.com/templateflow/tpl-MNI152NLin6Asym'
 
 
 def require(condition,message):
@@ -185,6 +187,41 @@ def guarded_source(row,blocked):
     return path
 
 
+def prepare_template_mask(out,rows,protected,template_path):
+    """Resample a predefined anatomical mask using an eligible header only.
+
+    The only participant information used here is the common image grid. No
+    COPE intensities, coverage thresholds, classifier results or holdouts enter.
+    """
+    import numpy as np
+    import nibabel as nib
+    from nibabel.processing import resample_from_to
+    require(bool(rows),'Empty map plan')
+    for row in rows: guarded_source(row,set(protected['participant_ids']))
+    template_path=Path(template_path)
+    require(template_path.name==TEMPLATE_MASK and template_path.is_file(),
+            'Required independent TemplateFlow brain mask unavailable: '+str(template_path))
+    require(not any(p.startswith('sub-') for p in template_path.resolve().parts),'Participant file cannot supply the template mask')
+    template=nib.load(template_path); values=template.get_fdata()
+    require(values.ndim==3 and np.isfinite(values).all() and np.isin(values,[0,1]).all() and values.any(),
+            'TemplateFlow source must be a finite binary brain mask')
+    reference=nib.load(rows[0]['source_path'])
+    resampled=resample_from_to(template,(reference.shape,reference.affine),order=0,mode='constant',cval=0)
+    mask=resampled.get_fdata().astype('uint8')
+    require(mask.any(),'Template mask and source map grid do not overlap')
+    target=out/'independent_mask.nii.gz'; metadata=out/'independent_mask.json'
+    out.mkdir(parents=True,exist_ok=True)
+    clean=nib.Nifti1Image(mask,reference.affine); clean.header.set_xyzt_units('mm'); nib.save(clean,target)
+    write_json(metadata,dict(kind='independent_template',source_url=TEMPLATE_URL,
+        description='Fixed TemplateFlow MNI152NLin6Asym res-02 brain mask; nearest-neighbor resampling to the common COPE grid.',
+        template_filename=TEMPLATE_MASK,template_sha256=sha256(template_path),sha256=sha256(target),
+        interpolation='nearest_neighbor',order=0,participant_intensities_used=False,
+        accuracy_or_group_coverage_selection=False,voxel_count=int(mask.sum()),
+        shape=list(mask.shape),affine=reference.affine.tolist(),
+        license_note='Template mask retains its upstream terms; review attribution before publication.'))
+    return target,metadata
+
+
 def archive_maps(out,rows,protected,mask_path,mask_metadata,contract):
     import numpy as np
     import nibabel as nib
@@ -226,7 +263,8 @@ def archive_maps(out,rows,protected,mask_path,mask_metadata,contract):
     write_json(destination/'dataset_description.json',dict(Name='Public educational social-context outcome COPEs',
         SourceDatasetDOI=contract['source_doi'],SourceDatasetVersion='1.0.0',License='CC0',
         Description='Signed uncentered condition COPEs; no paper models or protected validation maps',
-        MaskProvenance=meta,ContrastDefinitions=MAPPING,PrivateMembershipAuditRetained=True))
+        MaskProvenance=meta,MaskLicense='Upstream template terms; see MaskProvenance',
+        ContrastDefinitions=MAPPING,PrivateMembershipAuditRetained=True))
     write_json(destination/'aggregate_image_checks.json',dict(finite_maps=len(metrics),negative_effects_preserved=True,
         minimum=min(x['minimum'] for x in metrics),maximum=max(x['maximum'] for x in metrics),
         negative_fraction_range=[min(x['negative_fraction'] for x in metrics),max(x['negative_fraction'] for x in metrics)]))
@@ -237,13 +275,16 @@ def archive_maps(out,rows,protected,mask_path,mask_metadata,contract):
         'The mask is independently defined; the later release review must verify its coverage and source provenance.\n'
         'This is a staged, unreviewed derivative bundle, not a published Zenodo release.\n')
     archive=out/'public_outcome_copes.zip'
+    expected={r['path'] for r in output_rows}|{'mask.nii.gz','manifest.csv','dataset_description.json','aggregate_image_checks.json','README'}
+    actual={p.relative_to(destination).as_posix() for p in destination.rglob('*') if p.is_file()}
+    require(actual==expected,'Unexpected or missing bundle contents; archive refused')
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_STORED,allowZip64=True) as z:
-        for p in sorted(destination.rglob('*')):
-            if p.is_file(): z.write(p,p.relative_to(destination))
+        for relative in sorted(expected): z.write(destination/relative,relative)
     require(archive.stat().st_size<50_000_000_000,'Archive exceeds default Zenodo quota')
     summary=dict(status='archive_staged_for_review',n=len({r['participant_id'] for r in rows}),map_files=len(rows),
                  compressed_map_bytes=sum(r['byte_size'] for r in output_rows),archive_bytes=archive.stat().st_size,
-                 archive_sha256=sha256(archive),ready_to_publish=False,holdout_images_accessed=False)
+                 archive_sha256=sha256(archive),support_files=5,archive_members=len(expected),
+                 exact_content_allowlist_passed=True,ready_to_publish=False,holdout_images_accessed=False)
     write_json(out/'archive_summary.json',summary)
     return summary
 
@@ -257,9 +298,13 @@ def main():
     group.add_argument('--no-additional-external-validation',action='store_true')
     p.add_argument('--stage',choices=('overlap','plan','archive'),default='plan')
     p.add_argument('--mask',type=Path); p.add_argument('--mask-provenance',type=Path)
+    p.add_argument('--prepare-template-mask',action='store_true',
+                   help='At archive stage, resample the fixed TemplateFlow mask into the eligible source grid')
     p.add_argument('--output',type=Path,default=ROOT/'work/zenodo-v1')
     a=p.parse_args(); out=a.output.resolve(); paper=a.paper_root.resolve(); projects=a.projects_root.resolve()
     try:
+        require(not a.prepare_template_mask or (a.stage=='archive' and a.mask is None and a.mask_provenance is None),
+                '--prepare-template-mask requires --stage archive and replaces --mask/--mask-provenance')
         require(out.is_relative_to((ROOT/'work').resolve()),'Curation outputs must stay under this tutorial repository work/')
         # The isolated tutorial checkout may be a sibling under projects/. Its
         # own work/ is permitted; the paper checkout is never an output target.
@@ -284,6 +329,9 @@ def main():
         rows,summary=plan(paper,projects,out,protected,public_rows,contract)
         print(json.dumps(summary,indent=2))
         if a.stage=='archive':
+            if a.prepare_template_mask:
+                a.mask,a.mask_provenance=prepare_template_mask(out,rows,protected,
+                    scope['c'].templateflow/'tpl-MNI152NLin6Asym'/TEMPLATE_MASK)
             if a.mask: require(not a.mask.resolve().is_relative_to(paper),'Do not use a paper-derived group/coverage mask')
             print(json.dumps(archive_maps(out,rows,protected,a.mask,a.mask_provenance,contract),indent=2))
         for path,h in protected['source_hashes'].items(): require(sha256(path)==h,'Membership source changed during export')

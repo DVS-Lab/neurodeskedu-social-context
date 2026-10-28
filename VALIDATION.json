@@ -10,7 +10,7 @@
   "synthetic_maps": 384,
   "synthetic_wall_seconds_approximately": 10.53,
   "synthetic_in_notebook_elapsed_seconds": 3.1139570829982404,
-  "focused_checks_passed": 14,
+  "focused_checks_passed": 16,
   "watermark_tested": false,
   "software": {
     "numpy": "2.1.3",
@@ -26,5 +26,5 @@
   },
   "notebook_sha256": "d9665f2d212ef4c241f3561bcf7f5b8fdd920a48cc878cbae95f2dff1df86675",
   "post_execution_edit": "Relative-folder display and held-out-cohort explanation added; model/data code unchanged.",
-  "export_validation": "Synthetic membership/alias/header-sanitization and archive tests passed; real protected overlap and real map export require Linux2 private inputs."
+  "export_validation": "Synthetic membership, alias, header-sanitization, exact ZIP contents, independent-template resampling and archive tests passed; real protected overlap and real map export require Linux2 private inputs."
 }
