@@ -2,7 +2,7 @@
 
 A separate educational draft for David, Jacob and Riccardo. It starts from precomputed outcome COPEs and teaches participant-separated Shared Reward → Trust classification. This folder is independent of `rf1-sra-neural-signature`; the paper's analysis and validation samples are not modified.
 
-**Status:** notebook draft with a labelled synthetic fixture. Real public derivatives have not been exported, uploaded, or tested. The GitHub repository hosts the draft; the public-map archive and Zenodo record are still pending curation.
+**Status:** notebook draft with a labelled synthetic fixture. A public-data candidate archive (67 participants, 804 outcome maps) has been staged and its downstream notebook computation tested locally. Zenodo publication is pending license/notice corrections; its downloader and Neurodesk Play execution are not yet tested. See `PUBLIC_CANDIDATE_REVIEW.json`. The committed notebook still defaults to synthetic mode.
 
 ## Start here
 
