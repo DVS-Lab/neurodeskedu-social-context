@@ -64,6 +64,14 @@ The release archive should contain:
 
 Do not export paper-derived weights, group patterns, paper coverage masks, or outputs involving nonpublic/reserved people. The educational features and display maps are built within the tutorial's own permitted data boundary.
 
+## Current repository and guarded Linux2 export
+
+The requested GitHub repository is now live. The user confirmed that the complete protected pool is the paper's original 50 plus 12 supplemental holdouts, with no additional external list. These 62 people were selected from the larger study; their overlap with the public 114 must be counted, not assumed. The private locks are not present in the local Mac checkout.
+
+[EXPORT_PUBLIC.md](EXPORT_PUBLIC.md) gives metadata-only overlap, provenance/size planning and staged-archive commands for Linux2. `tools/prepare_public_maps.py` checks the actual pinned public task/run inventory as well as participant membership, so it cannot export additional unpublished runs merely because their participant ID is public. Its consumer bundle includes no protected membership file or source filesystem paths. Curator-controlled mask provenance and later release review remain required.
+
+The notebook explains the reserved-validation boundary without exposing participant identities. Its ordinary cross-validation test folds are temporary partitions inside the permitted development subset; they are not the paper's sealed final evaluation cohort.
+
 ## Eligibility check before image export
 
 The final sample is:

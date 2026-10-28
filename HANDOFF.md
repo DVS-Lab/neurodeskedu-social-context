@@ -5,7 +5,7 @@ This is an educational draft, separate from the paper. The notebook currently ru
 ## Scientific/data review
 
 - Confirm the public source snapshot: ds005123 v1.0.0, originally N=114. Determine the actual eligible overlap of Shared Reward and Trust after existing QC and map completeness checks; do not promise N=114.
-- Obtain the authoritative curator-prepared union of sealed N=50 and external-validation membership using metadata only. Exclude those people before any map export. Keep membership/exclusion records private under ignored work/ or an approved private curation location.
+- The user confirmed the full 62-person paper protection pool (original 50 plus 12 supplemental) and no additional external list. Obtain the authoritative private locks using the metadata-only overlap command in EXPORT_PUBLIC.md. Exclude those people before any map export. Keep membership/exclusion records private under ignored work/ or an approved private curation location.
 - Check the exact source outcome COPE definitions, signs, names/weights, phase evidence and retained-run strategy. The educational prediction is human (equal friend/stranger mean) versus computer, averaging positive/negative outcomes. This differs from the paper's full cross-valence matrix.
 - Use only participant-specific public-source derivatives. Establish an independent fixed template/anatomical mask; do not copy paper masks, trained weights or group patterns involving additional people.
 - Prepare a metadata export plan, record actual compressed file sizes, run the plan checker, and review provenance, finite values and geometry in the later approved export. The draft tools do not perform that image export.

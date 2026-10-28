@@ -1,0 +1,2144 @@
+{
+  "source_dataset": "ds005123",
+  "source_version": "1.0.0",
+  "source_doi": "10.18112/openneuro.ds005123.v1.0.0",
+  "public_participants_url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds005123/1.0.0/participants.tsv",
+  "public_participants_sha256": "335cbd0c3e60dd7df9293400222df05e908f2d18d97b103f6ee58f935dea6da3",
+  "public_participants_git_blob": "7d31b004fa1dfae2197f8707c3807c6a3ce5617b",
+  "public_participants_n": 114,
+  "phase_resolved_audit": {
+    "directory": "logs/records/phase-resolved-20261005-144746",
+    "model_commit": "562f0d15e0ac370a69ea36d40fdcb23f5e20f597",
+    "retained_run_policy": "verified_fixed_effects_or_l1_passthrough",
+    "outcome_copes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "runtime_sources": {
+    "sharedreward": {
+      "templates/L1_task-sharedreward_model-1_type-act.fsf": "cf23311dc4d7b33693f2f08bb0d7880f9ae747c2afdfd3cd08adad76999c1025",
+      "templates/L2_task-sharedreward_model-1_type-act.fsf": "45a487c3b641d183191160ce24309c85a74b225271222607cb4e6960a538c501",
+      "code/gen3colfiles.sh": "3a2dd543e7732528fed40a70cea9cc46c737937061fb2b2670ed548793c37781",
+      "code/BIDSto3col.sh": "01ebe163ceb2ee4e654a180c795f8ed5a0b48ac5d6030659a30ad8b3205d468f",
+      "code/L1stats.sh": "10fa611e3597ea6c4251579b698d2d5c68ce37256ecb6986e9ab3648769376e1",
+      "code/L2stats.sh": "4605ccf9b788199d81bd6c1f19a213ec410a472ccb1decd40896af636abe2bd8",
+      "code/phase_resolved_activation.py": "885c6693308c987fe8afe0aa8d978899624366f151387675085f9f3cd25cc2a6",
+      "logs/records/phase-resolved-20261005-144746/summary.json": "785896838b1918296c36844e4d6d0f49902aa0f0b152894b888b56246debb5d1",
+      "logs/records/phase-resolved-20261005-144746/verified-subject-outputs.tsv": "06cb39b3d8fe18ecc00471fc6a1e99176500dac12971669dfbdd20e2b51e865a",
+      "logs/records/phase-resolved-20261005-144746/provenance.json": "a01cea25ad86c23fd20ae1860258a9f9e7c3234028946b9795781a8420944467"
+    },
+    "trust": {
+      "templates/L1_task-trust_model-1_type-act.fsf": "e9d469890e6fd53acef7b788badde09c53ebfac1a5a7a1bda94b34faf94c121f",
+      "code/gen3colfiles.sh": "99ba4e3c6679a2963893f9e9937ffab954d98779b7820b0f0ae51e70f48b8720",
+      "code/BIDSto3col.sh": "219b7b7c5bb2224126dc88e062d9c5c51a34a23622aa1b088ae02db196de1ad4"
+    }
+  },
+  "paper_metadata": {
+    "provenance/subject_split_v1.json": "9aa6b41286c4293d0fb78bce27299d87e81f27743170019b99fc10349f4ad009",
+    "provenance/revised/samples/samples.json": "678c0cc1bf73ddacb6ba668f05ec8f6be895cd8977ea0e104c9e3abcfe857abe"
+  },
+  "public_tree_sha": "9ee611b31e40bd1c5f05157f18281e3e9a12558a",
+  "public_task_runs": [
+    {
+      "participant_id": "sub-10317",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10317",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10317",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10369",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10369",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10369",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10402",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10402",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10402",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10402",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10418",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10418",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10418",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10418",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10462",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10462",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10478",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10478",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10478",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10478",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10486",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10486",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10486",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10486",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10529",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10529",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10529",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10529",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10541",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10541",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10541",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10541",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10559",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10559",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10559",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10559",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10572",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10572",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10572",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10572",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10581",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10581",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10581",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10581",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10584",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10584",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10584",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10585",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10585",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10585",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10585",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10589",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10589",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10589",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10589",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10590",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10590",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10590",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10590",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10596",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10596",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10596",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10596",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10603",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10603",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10603",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10606",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10606",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10606",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10606",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10608",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10608",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10608",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10617",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10617",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10617",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10636",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10636",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10636",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10636",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10638",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10638",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10638",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10638",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10640",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10640",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10640",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10640",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10641",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10641",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10642",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10642",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10642",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10642",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10644",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10644",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10644",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10644",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10647",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10647",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10647",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10647",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10649",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10649",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10649",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10649",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10652",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10652",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10652",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10652",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10656",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10656",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10656",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10656",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10657",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10657",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10657",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10657",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10661",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10661",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10661",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10661",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10663",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10663",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10663",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10663",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10668",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10668",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10668",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10673",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10673",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10673",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10673",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10674",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10674",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10674",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10674",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10677",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10677",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10677",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10677",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10685",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10685",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10685",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10685",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10690",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10690",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10690",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10691",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10691",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10691",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10691",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10700",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10700",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10700",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10700",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10701",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10701",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10701",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10701",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10713",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10713",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10713",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10713",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10716",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10716",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10716",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10716",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10718",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10718",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10718",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10718",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10720",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10720",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10720",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10720",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10723",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10723",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10723",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10723",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10741",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10741",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10741",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10741",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10748",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10748",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10748",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10748",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10767",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10767",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10767",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10767",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10770",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10770",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10770",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10770",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10777",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10777",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10777",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10781",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10781",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10781",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10781",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10783",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10783",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10783",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10783",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10785",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10785",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10785",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10785",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10794",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10794",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10794",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10794",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10800",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10800",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10800",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10800",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10801",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10801",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10801",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10801",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10802",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10802",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10802",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10802",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10803",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10803",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10804",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10804",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10804",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10804",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10806",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10806",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10806",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10806",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10807",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10807",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10807",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10807",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10809",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10809",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10809",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10809",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10810",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10810",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10810",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10810",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10812",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10812",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10812",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10812",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10817",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10817",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10817",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10817",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10827",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10827",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10827",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10827",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10831",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10831",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10831",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10831",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10834",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10834",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10834",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10834",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10836",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10838",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10838",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10838",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10838",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10843",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10843",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10843",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10843",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10850",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10850",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10850",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10850",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10854",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10854",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10854",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10854",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10857",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10857",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10857",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10857",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10858",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10858",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10858",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10858",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10860",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10860",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10860",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10860",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10862",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10862",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10862",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10862",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10863",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10863",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10863",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10863",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10866",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10866",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10866",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10866",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10875",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10875",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10875",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10875",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10881",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10881",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10886",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10886",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10887",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10887",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10887",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10887",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10896",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10896",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10896",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10896",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10897",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10897",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10898",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10898",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10898",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10898",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10908",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10908",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10908",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10908",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10913",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10913",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10918",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10918",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10918",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10918",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10924",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10924",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10924",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10924",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10926",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10926",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10926",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10928",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10928",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10928",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10929",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10929",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10929",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10930",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10930",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10930",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10930",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10938",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10938",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10938",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10938",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10940",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10940",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10940",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10940",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10950",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10950",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10950",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10950",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10951",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10951",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10952",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10952",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10952",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10953",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10953",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10953",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10953",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10954",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10954",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10954",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10954",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10956",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10956",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10956",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10956",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10958",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10958",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10958",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10958",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10969",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10969",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10969",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10969",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10974",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10974",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10974",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10974",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10977",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10977",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10977",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10983",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10983",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10983",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10983",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10984",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10984",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-10984",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-10984",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-11005",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-11005",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-11005",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-11005",
+      "task": "trust",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-11031",
+      "task": "sharedreward",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-11031",
+      "task": "sharedreward",
+      "run": 2
+    },
+    {
+      "participant_id": "sub-11031",
+      "task": "trust",
+      "run": 1
+    },
+    {
+      "participant_id": "sub-11031",
+      "task": "trust",
+      "run": 2
+    }
+  ],
+  "session_mapping": "Sessionless public ds005123 v1.0.0 baseline acquisitions map to canonical RF1 ses-01; no follow-up sessions allowed."
+}

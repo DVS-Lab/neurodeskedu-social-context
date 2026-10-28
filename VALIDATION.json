@@ -10,7 +10,7 @@
   "synthetic_maps": 384,
   "synthetic_wall_seconds_approximately": 10.53,
   "synthetic_in_notebook_elapsed_seconds": 3.1139570829982404,
-  "focused_checks_passed": 6,
+  "focused_checks_passed": 14,
   "watermark_tested": false,
   "software": {
     "numpy": "2.1.3",
@@ -24,6 +24,7 @@
     "neurodesk_template_sha": "26c5955f95a30cff0c44c7906c8bff8d5b10c282",
     "neurodesk_readme_sha": "8e7d1f0d0bd6215fbbffe5cf679b3d446a8f480d"
   },
-  "notebook_sha256": "f19bfa18bc92f28c5ba9d498c4b8ea42296290aaaf3d0e90cee8eecd5953d395",
-  "post_execution_edit": "Display input folder relative to notebook; model and data code unchanged."
+  "notebook_sha256": "d9665f2d212ef4c241f3561bcf7f5b8fdd920a48cc878cbae95f2dff1df86675",
+  "post_execution_edit": "Relative-folder display and held-out-cohort explanation added; model/data code unchanged.",
+  "export_validation": "Synthetic membership/alias/header-sanitization and archive tests passed; real protected overlap and real map export require Linux2 private inputs."
 }
