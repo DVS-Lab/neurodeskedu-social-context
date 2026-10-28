@@ -57,56 +57,68 @@ def test_metadata_guard_rejects_incomplete_duplicate_and_ineligible_maps():
         with pytest.raises(ValueError): mod.check(public,changed,protected)
 
 
-def test_notebook_code_parses_and_defaults_to_the_published_public_release():
-    import ast,nbformat
-    nb=nbformat.read(ROOT/'Cross_task_decoding.ipynb',as_version=4)
-    nbformat.validate(nb)
-    for cell in nb.cells:
-        if cell.cell_type=='code':
-            ast.parse(cell.source)
-            assert len(cell.source.splitlines())<100
-    first=next(c.source for c in nb.cells if c.cell_type=='code')
-    assert 'MODE = "public"' in first
-    assert nb.metadata.neurodeskedu_draft.no_real_participant_data_packaged is True
-    config=json.loads((ROOT/'data_release.json').read_text())
-    assert config['status']=='published' and config['expected_n']==67
-    assert config['derivative_doi']=='10.5281/zenodo.23718599'
-    assert '23718599' in config['archive_url'] and len(config['archive_sha256'])==64
-    assert all(config['membership_audit'].values())
+def notebook_cell(marker):
+    import nbformat
+    notebook = nbformat.read(ROOT / 'Cross_task_decoding.ipynb', as_version=4)
+    return next(c.source for c in notebook.cells if c.cell_type == 'code' and marker in c.source)
 
 
-def test_public_mode_stops_before_network_when_release_unpublished():
-    import ast,nbformat
-    nb=nbformat.read(ROOT/'Cross_task_decoding.ipynb',as_version=4)
-    source=next(c.source for c in nb.cells if c.cell_type=='code' and 'def public_release' in c.source)
-    namespace={}; exec(compile(ast.parse(source),'<notebook download helpers>','exec'),namespace)
-    config=json.loads((ROOT/'data_release.json').read_text())
-    config['status']='draft_not_published'
-    with pytest.raises(AssertionError,match='Publish and review'):
-        namespace['public_release'](config)
+def test_notebook_runs_as_a_self_contained_module_example_without_installation():
+    import ast, nbformat
+    from IPython.core.inputtransformer2 import TransformerManager
+    notebook = nbformat.read(ROOT / 'Cross_task_decoding.ipynb', as_version=4)
+    nbformat.validate(notebook)
+    for cell in notebook.cells:
+        if cell.cell_type != 'code':
+            continue
+        ast.parse(TransformerManager().transform_cell(cell.source))
+        assert len(cell.source.splitlines()) < 60
+        assert not any(isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                       for node in ast.walk(ast.parse(TransformerManager().transform_cell(cell.source))))
+        assert 'pip install' not in cell.source and 'venv' not in cell.source
+        assert 'data_release.json' not in cell.source
+    first = next(c.source for c in notebook.cells if c.cell_type == 'code')
+    assert 'await module.load("fsl/6.0.7.22")' in first
+    pinned = json.loads((ROOT / 'data_release.json').read_text())
+    release_cell = notebook_cell('archive_sha =')
+    assert pinned['archive_sha256'] in release_cell and pinned['archive_url'] in release_cell
+    assert pinned['status'] == 'published' and all(pinned['membership_audit'].values())
 
 
-def test_public_loader_rejects_a_corrupted_cache_before_extraction(tmp_path,monkeypatch):
-    import ast,hashlib,stat,urllib.request,zipfile
-    nb=json.loads((ROOT/'Cross_task_decoding.ipynb').read_text())
-    source=next(''.join(c['source']) for c in nb['cells'] if c['cell_type']=='code' and 'def public_release' in ''.join(c['source']))
-    namespace=dict(Path=Path,hashlib=hashlib,urllib=__import__('urllib'),stat=stat,zipfile=zipfile,DATA_DIR=tmp_path,N_FOLDS=5)
-    exec(compile(ast.parse(source),'<notebook download helpers>','exec'),namespace)
-    config=json.loads((ROOT/'data_release.json').read_text())
-    (tmp_path/(config['archive_sha256']+'.zip')).write_bytes(b'corrupted download')
-    monkeypatch.setattr(urllib.request,'urlopen',lambda *a,**k:pytest.fail('Existing corrupt cache must stop, not download or fall back'))
-    with pytest.raises(AssertionError,match='Cached archive changed'):
-        namespace['public_release'](config)
+def test_corrupted_cache_stops_before_extraction_or_network(tmp_path, monkeypatch):
+    import hashlib, urllib.request, zipfile
+    cache = tmp_path / 'bad.zip'
+    cache.write_bytes(b'corrupted')
+    resources = [dict(name='test maps', path=cache, sha256='0' * 64, url='https://example.org/data')]
+    monkeypatch.setattr(urllib.request, 'urlretrieve', lambda *a: pytest.fail('Corrupt cache must stop'))
+    namespace = dict(Path=Path, hashlib=hashlib, urllib=__import__('urllib'), zipfile=zipfile,
+                     resources=resources, DATA_DIR=tmp_path, archive_sha='0' * 64)
+    with pytest.raises(AssertionError, match='Cached file changed'):
+        exec(notebook_cell('# Download and verify each file'), namespace)
     assert not list(tmp_path.glob('public-*'))
 
 
-def test_public_loader_requires_all_audit_attestations_before_network(tmp_path):
-    import ast
-    nb=json.loads((ROOT/'Cross_task_decoding.ipynb').read_text())
-    source=next(''.join(c['source']) for c in nb['cells'] if c['cell_type']=='code' and 'def public_release' in ''.join(c['source']))
-    namespace=dict(N_FOLDS=5)
-    exec(compile(ast.parse(source),'<notebook download helpers>','exec'),namespace)
-    config=json.loads((ROOT/'data_release.json').read_text())
-    config['membership_audit']['sealed_N50_excluded']=False
-    with pytest.raises(AssertionError,match='Curator membership/QC audit'):
-        namespace['public_release'](config)
+def test_wrong_download_is_not_promoted_or_extracted(tmp_path, monkeypatch):
+    import hashlib, urllib.request, zipfile
+    cache = tmp_path / 'maps.zip'
+    resources = [dict(name='test maps', path=cache, sha256='0' * 64, url='https://example.org/data')]
+    monkeypatch.setattr(urllib.request, 'urlretrieve', lambda url, path: path.write_bytes(b'wrong bytes'))
+    namespace = dict(Path=Path, hashlib=hashlib, urllib=__import__('urllib'), zipfile=zipfile,
+                     resources=resources, DATA_DIR=tmp_path, archive_sha='0' * 64)
+    with pytest.raises(AssertionError, match='Download checksum mismatch'):
+        exec(notebook_cell('# Download and verify each file'), namespace)
+    assert not cache.exists() and not list(tmp_path.glob('public-*'))
+
+
+def test_archive_cannot_extract_outside_release_directory(tmp_path):
+    import hashlib, urllib.request, zipfile
+    cache = tmp_path / 'maps.zip'
+    with zipfile.ZipFile(cache, 'w') as archive:
+        archive.writestr('../outside.txt', b'bad path')
+    checksum = hashlib.sha256(cache.read_bytes()).hexdigest()
+    resources = [dict(name='test maps', path=cache, sha256=checksum)]
+    namespace = dict(Path=Path, hashlib=hashlib, urllib=__import__('urllib'), zipfile=zipfile,
+                     resources=resources, DATA_DIR=tmp_path, archive_sha=checksum)
+    with pytest.raises(AssertionError):
+        exec(notebook_cell('# Download and verify each file'), namespace)
+    assert not (tmp_path / 'outside.txt').exists()

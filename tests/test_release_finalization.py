@@ -55,24 +55,26 @@ def test_finalizer_stops_on_changed_candidate_or_extra_files(tmp_path):
     assert not (tmp_path/'final.zip').exists()
 
 
-def test_notebook_reconstructs_only_the_pinned_reference_and_checks_voxel_hash(tmp_path,monkeypatch):
-    notebook=json.loads((ROOT/'Cross_task_decoding.ipynb').read_text())
-    cell=next(''.join(c['source']) for c in notebook['cells'] if 'def reconstruct_external_mask' in ''.join(c['source']))
-    functions=[node for node in ast.parse(cell).body if isinstance(node,ast.FunctionDef) and node.name in ('sha256','reconstruct_external_mask')]
-    namespace=dict(Path=Path,json=json,hashlib=hashlib,nib=nib,np=np,pd=pd,urllib=__import__('urllib'),DATA_DIR=tmp_path/'cache')
-    exec(compile(ast.Module(body=functions,type_ignores=[]),'notebook_functions','exec'),namespace)
-    bundle=tmp_path/'bundle';bundle.mkdir(); values=np.ones((2,3,4),dtype='uint8')
-    cache=namespace['DATA_DIR'];cache.mkdir();temp=cache/'template.nii.gz'
-    nib.save(nib.Nifti1Image(values,np.eye(4)),temp); h=sha256(temp);temp.rename(cache/f'template-{h}.nii.gz')
-    nib.save(nib.Nifti1Image(np.zeros((2,3,4),dtype='float32'),np.eye(4)),bundle/'reference.nii.gz')
-    (bundle/'manifest.csv').write_text('path\nreference.nii.gz\n')
-    from finalize_public_release import TEMPLATE_URL
-    metadata=dict(MaskDistribution='external_reference_only',MaskProvenance=dict(template_download_url=TEMPLATE_URL,
-        template_sha256=h,expected_resampled_mask_data_sha256=hashlib.sha256(values.tobytes()).hexdigest()))
-    (bundle/'dataset_description.json').write_text(json.dumps(metadata))
-    monkeypatch.setattr(urllib.request,'urlopen',lambda *a,**k:pytest.fail('Pinned cached reference should not need a network request'))
-    namespace['reconstruct_external_mask'](bundle)
-    np.testing.assert_equal(nib.load(bundle/'mask.nii.gz').get_fdata(),values)
-    metadata['MaskProvenance']['expected_resampled_mask_data_sha256']='0'*64
-    (bundle/'dataset_description.json').write_text(json.dumps(metadata))
-    with pytest.raises(AssertionError):namespace['reconstruct_external_mask'](bundle)
+def test_notebook_reconstructs_the_pinned_mask_and_stops_on_wrong_voxel_hash(tmp_path):
+    from nibabel.processing import resample_from_to
+    notebook = json.loads((ROOT / 'Cross_task_decoding.ipynb').read_text())
+    source = next(''.join(c['source']) for c in notebook['cells']
+                  if c['cell_type'] == 'code' and 'resampled_mask =' in ''.join(c['source']))
+    values = np.zeros((57, 70, 54), dtype='uint8')
+    values.ravel()[:84479] = 1
+    mask_path = tmp_path / 'template.nii.gz'
+    reference_path = tmp_path / 'reference.nii.gz'
+    nib.save(nib.Nifti1Image(values, np.eye(4)), mask_path)
+    nib.save(nib.Nifti1Image(np.zeros_like(values, dtype='float32'), np.eye(4)), reference_path)
+    metadata = dict(MaskDistribution='external_reference_only', MaskProvenance=dict(
+        expected_resampled_mask_data_sha256=hashlib.sha256(values.tobytes()).hexdigest()))
+    (tmp_path / 'dataset_description.json').write_text(json.dumps(metadata))
+    namespace = dict(nib=nib, np=np, json=json, hashlib=hashlib, resample_from_to=resample_from_to,
+                     example_path=reference_path, RELEASE_DIR=tmp_path,
+                     resources=[{}, dict(path=mask_path), dict(path=reference_path)])
+    exec(source, namespace)
+    np.testing.assert_equal(namespace['mask_values'], values)
+    metadata['MaskProvenance']['expected_resampled_mask_data_sha256'] = '0' * 64
+    (tmp_path / 'dataset_description.json').write_text(json.dumps(metadata))
+    with pytest.raises(AssertionError):
+        exec(source, namespace)
