@@ -1,5 +1,5 @@
 {
-  "status": "final_archive_ready_for_zenodo_upload",
+  "status": "published_archive_and_tutorial_verified",
   "review_date": "2026-10-27",
   "archive_sha256": "08ea0ccfa3df67ec9ec34b29a50d852d5c0e53e5c1ad654073587c37dddd10ae",
   "archive_bytes": 310047052,
@@ -16,13 +16,13 @@
   "wall_seconds": 44.477082208002685,
   "in_notebook_elapsed_seconds": 10.528712415980408,
   "test_scope": "Final maps-only archive tested in a fresh Jupyter kernel. Original TemplateFlow reference fetched from its provider and exact binary mask reconstructed. All downstream computational cells passed; COPE/manifest bytes and predictions unchanged from the staged candidate. No paper or protected images accessed.",
-  "zenodo_download_tested": false,
+  "zenodo_download_tested": true,
   "neurodesk_play_tested": false,
   "private_membership_files_reaudited_on_mac": false,
   "public_release_config_status": "draft_not_published",
   "remaining_release_items": [
-    "Replace draft ZIP and license/description in Zenodo; retain version 1.0.0.",
-    "After publication pin DOI and actual file URL; test the Zenodo downloader. Neurodesk Play testing remains a later tutorial submission task."
+    "Human teaching/scientific review and Neurodesk Play testing before NeurodeskEDU submission.",
+    "Deferred nonblocking related-source DOI metadata correction; source snapshot remains pinned to v1.0.0."
   ],
   "mask_license_review": {
     "template_metadata_url": "https://raw.githubusercontent.com/templateflow/tpl-MNI152NLin6Asym/master/template_description.json",
@@ -41,5 +41,8 @@
   "cope_and_manifest_bytes_unchanged": true,
   "classification_results_unchanged": true,
   "final_notebook_wall_seconds": 25.240068707993487,
-  "final_notebook_elapsed_seconds": 9.389546375023201
+  "final_notebook_elapsed_seconds": 9.389546375023201,
+  "watermark_tested": true,
+  "published_record_url": "https://zenodo.org/records/23718599",
+  "published_doi": "10.5281/zenodo.23718599"
 }

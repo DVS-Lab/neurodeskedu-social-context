@@ -1,32 +1,37 @@
-# Handoff for Jacob and Riccardo
+# Tutorial handoff for Jacob and Riccardo
 
-This is an educational draft, separate from the paper. The committed notebook defaults to labelled synthetic maps. Its public-data computation has also been tested locally with the finalized 67-person archive (804 outcome COPEs), including independent template retrieval and exact mask reconstruction. Zenodo download and Neurodesk Play testing remain pending; this is not yet a NeurodeskEDU submission.
+The tutorial works with the published educational dataset, [Zenodo v1.0.0](https://doi.org/10.5281/zenodo.23718599): 67 public participants and 804 signed outcome COPEs. `Cross_task_decoding.ipynb` defaults to public mode and includes executed outputs. This remains separate from the neural-signature paper and is not yet submitted to NeurodeskEDU.
 
-## Scientific/data review
+## Run and review
 
-- Confirm the public source snapshot: ds005123 v1.0.0, originally N=114. Determine the actual eligible overlap of Shared Reward and Trust after existing QC and map completeness checks; do not promise N=114.
-- The user confirmed the full 62-person paper protection pool (original 50 plus 12 supplemental) and no additional external list. Obtain the authoritative private locks using the metadata-only overlap command in EXPORT_PUBLIC.md. Exclude those people before any map export. Keep membership/exclusion records private under ignored work/ or an approved private curation location.
-- Check the exact source outcome COPE definitions, signs, names/weights, phase evidence and retained-run strategy. The educational prediction is human (equal friend/stranger mean) versus computer, averaging positive/negative outcomes. This differs from the paper's full cross-valence matrix.
-- Use only participant-specific public-source derivatives. Use the fixed external TemplateFlow reference and verified reconstruction; do not copy paper masks, trained weights or group patterns involving additional people. The template itself is not redistributed in the final dataset.
-- Prepare a metadata export plan, record actual compressed file sizes, run the plan checker, and review provenance, finite values and geometry in the later approved export. The staged exporter and finalizer are provided; the final upload excludes third-party template assets.
-- Finalize licenses, the original dataset/data-paper citation, derivative DOI, authors' full names/contributions and AI-assistance statement.
+1. Clone/update this repository on a laptop or desktop session. Use Python 3.10–3.13 and run `bash run_tutorial.sh`; select **Kernel → Restart Kernel and Run All Cells** in JupyterLab. The launcher creates an isolated `.venv` and installs the pinned requirements.
+2. Read the notebook as a learner: does it clearly explain the source COPEs, human/computer construction, participant-level folds, transfer target, paired ordering metric, confidence intervals and limitations of coefficient/forward maps?
+3. Run it in a fresh **Neurodesk Play** session. Check download, dependencies, kernel/restart behavior, memory/runtime, plots, watermark and static notebook rendering. This target environment has not yet been tested.
+4. Finalize actual contributors' full names, contributions and tutorial authorship. Dataset creators and tutorial authors need not be identical; do not add people merely for anticipated work. Keep the existing AI-assistance disclosure.
+5. Agree with NeurodeskEDU maintainers on the small `data_release.json` sidecar. Check the contribution guide, README, template and submission terms before preparing a PR. No submission or message to colleagues has been sent.
 
-## Technical/teaching review
+## Completed verification
 
-- Read the notebook without running it: are the COPE/label distinction, paired ordering metric, participant folds and cross-task interpretation clear?
-- Run the synthetic draft from a fresh kernel, including a second Run All to check repeatability. Its accuracies are simulated and cannot guide paper choices.
-- After curation, bundle the maps/metadata into one ZIP (or a few documented archives); >1,000 loose map attachments exceed Zenodo's stated file-count limit. Check total byte size and checksum. Do not upload raw BOLD or whole FEAT trees.
-- Create a reviewed versioned Zenodo record; populate the release DOI/URL/SHA256, actual N and audit fields in data_release.json. This draft does not create a remote deposit or mint a DOI.
-- Test real public mode in a clean Neurodesk Play session: dependency installation, download/retry failure, checksums, memory/runtime, plots and watermark. Confirm the notebook does not require paths into this local folder's parent or the paper repository.
-- Agree with maintainers on including the small release-configuration JSON with the otherwise self-contained notebook. Remove template instructions, retain needed citations/disclosures, and check static rendering.
-- Test a checksum mismatch and incomplete archive: execution should stop, never silently use synthetic data. Finalize the expected validation cells and deterministic tolerances without selecting parameters for higher accuracy.
-- After internal testing/review, submit a NeurodeskEDU PR with dependencies, expected outputs and contributor information. Publication follows automated checks and merge, while peer review follows publication.
+- A fresh kernel downloaded the actual published Zenodo ZIP from an empty cache, verified its SHA256, extracted the exact archive, retrieved the checksum-pinned external reference, reconstructed the reviewed mask, and ran the complete computation.
+- An isolated virtual environment installed only `requirements.txt`; `pip check`, the JupyterLab entry point, full notebook execution and watermark succeeded.
+- All 804 map checksums, finite values and common geometry passed; the independent mask has 84,479 voxels. The classifier ran all five folds without convergence warnings.
+- Twenty-one focused checks cover membership/export boundaries, exact release contents, preserved map bytes, template reconstruction and download/audit failure behavior. See `VALIDATION.json` and `PUBLISHED_RECORD_REVIEW.json`.
+- The source map/manifest bytes and fixed predictions are unchanged from the reviewed prepublication candidate. No parameters or masks were selected using accuracy.
 
-## What is already provided
+## Scientific boundary
 
-- A 22-cell draft with 12-map data layout, participant-separated five-fold evaluation, within-SR control, SR→Trust transfer, paired participant bootstrap and coefficient/forward-pattern displays.
-- A synthetic fixture for code-flow testing only; real data use requires a completed release configuration.
-- Storage arithmetic, optional summation of recorded file sizes, and a metadata-only pre-export membership/completeness checker.
-- Proposed dependency pins, licences and a separate local development folder.
+The source snapshot is OpenNeuro ds005123 v1.0.0, originally N=114. The export required existing QC and complete maps and excluded the parent's full 62-person protected pool before source access. The tutorial consumes only public derivatives and never reads private membership lists, paper caches, fitted paper signatures or reserved validation images. The Mac consumer test does not recreate the private Linux2 membership audit; its evidence and immutable map-byte fingerprints are documented in `data_release.json`.
 
-Do not use educational results to revise the paper's frozen candidates or score protected validation subjects. This handoff has not been sent to anyone automatically.
+The tutorial averages positive/negative outcomes within partner and averages friend/stranger equally into the human class. It trains Shared Reward human/computer patterns and evaluates both Shared Reward and Trust on the same held-out participants. The paired ordering score is not ordinary threshold-based single-map accuracy. Bootstrap intervals describe fixed out-of-fold predictions and omit uncertainty from model refitting; they are not permutation tests. Transfer does not establish an abstract or uniquely social representation.
+
+Do not use tutorial results to revise the paper's frozen candidates, access reserved subjects, or claim independent final validation. No UGR or betrayal analysis is part of this tutorial.
+
+## Dataset and licensing
+
+The final ZIP contains exactly 804 COPEs and four original supporting files, under CC0 1.0. It contains no third-party template image or mask. The notebook retrieves the original TemplateFlow reference separately under upstream terms, verifies its SHA256 and checks the exact reconstructed binary-mask hash. Code is MIT; original tutorial narrative is CC BY 4.0.
+
+Curator-only export/finalization instructions are in `EXPORT_PUBLIC.md`; learners should not run those tools. Keep all images, private curation records, caches and virtual environments out of Git.
+
+## Deferred metadata item
+
+At the user's request, the Zenodo related-source DOI correction can wait. Its `isDerivedFrom` entry currently points to ds005123 v1.1.3; the archive, description, notebook and fixed source contract use v1.0.0. This is a metadata edit only, not another archive upload. Keep the analysis source pinned to v1.0.0.

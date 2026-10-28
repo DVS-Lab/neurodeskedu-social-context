@@ -57,7 +57,7 @@ def test_metadata_guard_rejects_incomplete_duplicate_and_ineligible_maps():
         with pytest.raises(ValueError): mod.check(public,changed,protected)
 
 
-def test_notebook_code_parses_and_is_explicitly_synthetic():
+def test_notebook_code_parses_and_defaults_to_the_published_public_release():
     import ast,nbformat
     nb=nbformat.read(ROOT/'Cross_task_decoding.ipynb',as_version=4)
     nbformat.validate(nb)
@@ -66,8 +66,13 @@ def test_notebook_code_parses_and_is_explicitly_synthetic():
             ast.parse(cell.source)
             assert len(cell.source.splitlines())<100
     first=next(c.source for c in nb.cells if c.cell_type=='code')
-    assert 'MODE = "synthetic"' in first
+    assert 'MODE = "public"' in first
     assert nb.metadata.neurodeskedu_draft.no_real_participant_data_packaged is True
+    config=json.loads((ROOT/'data_release.json').read_text())
+    assert config['status']=='published' and config['expected_n']==67
+    assert config['derivative_doi']=='10.5281/zenodo.23718599'
+    assert '23718599' in config['archive_url'] and len(config['archive_sha256'])==64
+    assert all(config['membership_audit'].values())
 
 
 def test_public_mode_stops_before_network_when_release_unpublished():
@@ -76,5 +81,32 @@ def test_public_mode_stops_before_network_when_release_unpublished():
     source=next(c.source for c in nb.cells if c.cell_type=='code' and 'def public_release' in c.source)
     namespace={}; exec(compile(ast.parse(source),'<notebook download helpers>','exec'),namespace)
     config=json.loads((ROOT/'data_release.json').read_text())
+    config['status']='draft_not_published'
     with pytest.raises(AssertionError,match='Publish and review'):
+        namespace['public_release'](config)
+
+
+def test_public_loader_rejects_a_corrupted_cache_before_extraction(tmp_path,monkeypatch):
+    import ast,hashlib,stat,urllib.request,zipfile
+    nb=json.loads((ROOT/'Cross_task_decoding.ipynb').read_text())
+    source=next(''.join(c['source']) for c in nb['cells'] if c['cell_type']=='code' and 'def public_release' in ''.join(c['source']))
+    namespace=dict(Path=Path,hashlib=hashlib,urllib=__import__('urllib'),stat=stat,zipfile=zipfile,DATA_DIR=tmp_path,N_FOLDS=5)
+    exec(compile(ast.parse(source),'<notebook download helpers>','exec'),namespace)
+    config=json.loads((ROOT/'data_release.json').read_text())
+    (tmp_path/(config['archive_sha256']+'.zip')).write_bytes(b'corrupted download')
+    monkeypatch.setattr(urllib.request,'urlopen',lambda *a,**k:pytest.fail('Existing corrupt cache must stop, not download or fall back'))
+    with pytest.raises(AssertionError,match='Cached archive changed'):
+        namespace['public_release'](config)
+    assert not list(tmp_path.glob('public-*'))
+
+
+def test_public_loader_requires_all_audit_attestations_before_network(tmp_path):
+    import ast
+    nb=json.loads((ROOT/'Cross_task_decoding.ipynb').read_text())
+    source=next(''.join(c['source']) for c in nb['cells'] if c['cell_type']=='code' and 'def public_release' in ''.join(c['source']))
+    namespace=dict(N_FOLDS=5)
+    exec(compile(ast.parse(source),'<notebook download helpers>','exec'),namespace)
+    config=json.loads((ROOT/'data_release.json').read_text())
+    config['membership_audit']['sealed_N50_excluded']=False
+    with pytest.raises(AssertionError,match='Curator membership/QC audit'):
         namespace['public_release'](config)

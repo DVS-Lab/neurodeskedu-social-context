@@ -1,21 +1,21 @@
 {
-  "status": "draft_not_published",
+  "status": "published",
   "source_dataset": "ds005123",
   "source_version": "1.0.0",
   "source_doi": "10.18112/openneuro.ds005123.v1.0.0",
-  "derivative_doi": null,
-  "archive_url": null,
+  "derivative_doi": "10.5281/zenodo.23718599",
+  "archive_url": "https://zenodo.org/api/records/23718599/files/public_outcome_copes_v1.0.0.zip/content",
   "archive_sha256": "08ea0ccfa3df67ec9ec34b29a50d852d5c0e53e5c1ad654073587c37dddd10ae",
-  "max_download_bytes": 2000000000,
-  "max_uncompressed_bytes": 5000000000,
+  "max_download_bytes": 320000000,
+  "max_uncompressed_bytes": 1000000000,
   "expected_n": 67,
   "manifest_path": "manifest.csv",
   "mask_path": "mask.nii.gz",
   "membership_audit": {
-    "public_release_only": false,
-    "sealed_N50_excluded": false,
-    "external_validation_excluded": false,
-    "qc_and_complete_maps_verified": false
+    "public_release_only": true,
+    "sealed_N50_excluded": true,
+    "external_validation_excluded": true,
+    "qc_and_complete_maps_verified": true
   },
   "mask_provenance": {
     "kind": "independent_template",
@@ -23,5 +23,15 @@
     "source_url": "https://github.com/templateflow/tpl-MNI152NLin6Asym",
     "distribution": "external_reference_only"
   },
-  "derivative_version": "1.0.0"
+  "derivative_version": "1.0.0",
+  "zenodo_record_url": "https://zenodo.org/records/23718599",
+  "zenodo_archive_md5": "md5:1b3af1e6ea530eaa5760b4c5f2e50d33",
+  "membership_audit_evidence": {
+    "method": "Guarded Linux2 export against pinned public participant/run inventory, original/revised private split fingerprints and existing QC; finalizer checks and preserves the reviewed map/manifest bytes.",
+    "protected_pool_n": 62,
+    "paper_private_membership_reaudited_on_mac": false,
+    "source_contract": "config/source_contract.json",
+    "staged_archive_sha256": "3633a9d93f7b30a520b0056adaae352927bf7d4a6135aedefa4d1db2e84734e0",
+    "review": "PUBLIC_CANDIDATE_REVIEW.json"
+  }
 }
