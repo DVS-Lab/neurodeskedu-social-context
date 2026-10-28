@@ -1,0 +1,14 @@
+# Downloaded/fixture images, private curation records and local execution products
+/data/
+/work/
+/outputs/
+/.venv/
+/.ipynb_checkpoints/
+__pycache__/
+.pytest_cache/
+*.nii
+*.nii.gz
+*.zip
+*.tar
+*.tar.gz
+.DS_Store

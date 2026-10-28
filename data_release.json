@@ -1,0 +1,25 @@
+{
+  "status": "draft_not_published",
+  "source_dataset": "ds005123",
+  "source_version": "1.0.0",
+  "source_doi": "10.18112/openneuro.ds005123.v1.0.0",
+  "derivative_doi": null,
+  "archive_url": null,
+  "archive_sha256": null,
+  "max_download_bytes": 2000000000,
+  "max_uncompressed_bytes": 5000000000,
+  "expected_n": null,
+  "manifest_path": "manifest.csv",
+  "mask_path": "mask.nii.gz",
+  "membership_audit": {
+    "public_release_only": false,
+    "sealed_N50_excluded": false,
+    "external_validation_excluded": false,
+    "qc_and_complete_maps_verified": false
+  },
+  "mask_provenance": {
+    "kind": "independent_template",
+    "description": null,
+    "source_url": null
+  }
+}

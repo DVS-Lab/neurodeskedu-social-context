@@ -1,0 +1,60 @@
+{
+  "assumptions": "Uncompressed float32 NIfTI-1 maps; no participant images inspected; N=114 upper bound",
+  "shape": [
+    57,
+    70,
+    54
+  ],
+  "scenarios": [
+    {
+      "scenario": "Compact: two tasks \u00d7 human/computer, valence averaged",
+      "n": 114,
+      "maps_per_person": 4,
+      "total_maps": 456,
+      "bytes_per_map": 862192,
+      "total_bytes": 393159552,
+      "decimal_GB": 0.393159552,
+      "GiB": 0.3661583662033081
+    },
+    {
+      "scenario": "Core: two tasks \u00d7 three partners \u00d7 two valences",
+      "n": 114,
+      "maps_per_person": 12,
+      "total_maps": 1368,
+      "bytes_per_map": 862192,
+      "total_bytes": 1179478656,
+      "decimal_GB": 1.179478656,
+      "GiB": 1.0984750986099243
+    },
+    {
+      "scenario": "Core plus corresponding z-stat images",
+      "n": 114,
+      "maps_per_person": 24,
+      "total_maps": 2736,
+      "bytes_per_map": 862192,
+      "total_bytes": 2358957312,
+      "decimal_GB": 2.358957312,
+      "GiB": 2.1969501972198486
+    },
+    {
+      "scenario": "Core COPEs separately for two runs",
+      "n": 114,
+      "maps_per_person": 24,
+      "total_maps": 2736,
+      "bytes_per_map": 862192,
+      "total_bytes": 2358957312,
+      "decimal_GB": 2.358957312,
+      "GiB": 2.1969501972198486
+    }
+  ],
+  "alternative_2mm_core": {
+    "scenario": "Core: two tasks \u00d7 three partners \u00d7 two valences",
+    "n": 114,
+    "maps_per_person": 12,
+    "total_maps": 1368,
+    "bytes_per_map": 3610868,
+    "total_bytes": 4939667424,
+    "decimal_GB": 4.939667424,
+    "GiB": 4.6004237830638885
+  }
+}
