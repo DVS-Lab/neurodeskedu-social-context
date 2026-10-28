@@ -2,7 +2,7 @@
 
 A separate educational draft for David, Jacob and Riccardo. It starts from precomputed outcome COPEs and teaches participant-separated Shared Reward → Trust classification. This folder is independent of `rf1-sra-neural-signature`; the paper's analysis and validation samples are not modified.
 
-**Status:** notebook draft with a labelled synthetic fixture. Real public derivatives have not been exported, uploaded, or tested. No GitHub repository or Zenodo record has been created remotely.
+**Status:** notebook draft with a labelled synthetic fixture. Real public derivatives have not been exported, uploaded, or tested. The GitHub repository hosts the draft; the public-map archive and Zenodo record are still pending curation.
 
 ## Start here
 
@@ -12,7 +12,7 @@ The final public mode requires a published archive and completed `data_release.j
 
 ## Recommended repository and data host
 
-Use a new GitHub repository, suggested name **DVS-Lab/neurodeskedu-social-context**, for the notebook, small metadata/configuration files, documentation and tests. Keep the NIfTI maps and private curation records out of Git. When ready, contribute the reviewed notebook to NeurodeskEDU's functional-imaging examples; agree on placement of the small release-configuration sidecar with the maintainers.
+Use **[DVS-Lab/neurodeskedu-social-context](https://github.com/DVS-Lab/neurodeskedu-social-context)**, for the notebook, small metadata/configuration files, documentation and tests. Keep the NIfTI maps and private curation records out of Git. When ready, contribute the reviewed notebook to NeurodeskEDU's functional-imaging examples; agree on placement of the small release-configuration sidecar with the maintainers.
 
 Use **Zenodo for the versioned derivative-data release and DOI**. Its default quota is 50 GB per record; the stated 100-file limit means our >1,000 NIfTIs should go inside one ZIP, not become separate record attachments. Pin the release-specific URL/DOI and archive SHA256 in the notebook configuration. A DOI establishes a citation target; the exact archive checksum establishes the bytes consumed.
 

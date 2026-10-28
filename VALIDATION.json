@@ -24,5 +24,6 @@
     "neurodesk_template_sha": "26c5955f95a30cff0c44c7906c8bff8d5b10c282",
     "neurodesk_readme_sha": "8e7d1f0d0bd6215fbbffe5cf679b3d446a8f480d"
   },
-  "notebook_sha256": "68a8370a5fe0bb07a5fb0e495931b9ea3514bc26b06c17d07aa4be4442c7d9ba"
+  "notebook_sha256": "f19bfa18bc92f28c5ba9d498c4b8ea42296290aaaf3d0e90cee8eecd5953d395",
+  "post_execution_edit": "Display input folder relative to notebook; model and data code unchanged."
 }
